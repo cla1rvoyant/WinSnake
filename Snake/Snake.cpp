@@ -15,13 +15,9 @@ int main()
 	y_field += y_relative_pos;
 
 	int length = 2;
-<<<<<<< HEAD
 
 	vector<int> X_nex(length);
 	vector<int> Y_nex(length);
-=======
-	int X_nex[800], Y_nex[800];
->>>>>>> 2c7f47933dd2f608a0b00d76b5a7fcdbb1233180
 
 	char apple = 'o';
 	char snake_body = '#';
@@ -133,7 +129,7 @@ int main()
 	putchar(snake_heads[head_num]);
 
 	int dx = 1, dy = 0;
-
+	int prev_key = 77;
 	int x_apple, y_apple;
 	bool apple_flag;
 
@@ -172,27 +168,39 @@ int main()
 			switch (key)
 			{
 			case 80:
+				if (prev_key == 72)
+					break;
 				head_num = 3;
 				dy = 1;
 				dx = 0;
+				prev_key = 80;
 				break;
 
 			case 72:
+				if (prev_key == 80)
+					break;
 				head_num = 2;
 				dy = -1;
 				dx = 0;
+				prev_key = 72;
 				break;
 
 			case 75:
+				if (prev_key == 77)
+					break;
 				head_num = 1;
 				dy = 0;
 				dx = -1;
+				prev_key = 75;
 				break;
 
 			case 77:
+				if (prev_key == 75)
+					break;
 				head_num = 0;
 				dy = 0;
 				dx = 1;
+				prev_key = 77;
 				break;
 			}
 		}
