@@ -1,6 +1,7 @@
 ﻿#include <iostream>
 #include <conio.h>
 #include <windows.h>
+#include <vector>
 
 using namespace std;
 
@@ -14,7 +15,9 @@ int main()
 	y_field += y_relative_pos;
 
 	int length = 2;
-	int X_nex[50], Y_nex[50];
+
+	vector<int> X_nex(length);
+	vector<int> Y_nex(length);
 
 	char apple = 'o';
 	char snake_body = '#';
