@@ -8,7 +8,7 @@ int main()
 {
 	srand(time(0));
 
-	int x_field = 30, y_field = 16;
+	int x_field = 50, y_field = 16;
 	int x_relative_pos = 30, y_relative_pos = 4;
 	x_field += x_relative_pos;
 	y_field += y_relative_pos;
