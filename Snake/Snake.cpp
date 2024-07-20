@@ -5,30 +5,8 @@
 
 using namespace std;
 
-int main()
+void welcome(HANDLE h)
 {
-	srand(time(0));
-
-	int x_field = 50, y_field = 16;
-	int x_relative_pos = 30, y_relative_pos = 4;
-	x_field += x_relative_pos;
-	y_field += y_relative_pos;
-
-	int length = 2;
-
-	vector<int> X_nex(length);
-	vector<int> Y_nex(length);
-
-	char apple = 'o';
-	char snake_body = '#';
-	char snake_heads[4] = {16, 17, 30, 31};
-	int head_num = 0;
-
-	COORD c;
-	HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
-	CONSOLE_CURSOR_INFO cci = { sizeof(cci), false };
-	SetConsoleCursorInfo(h, &cci);
-
 	SetConsoleTextAttribute(h, 15);
 	cout << "\n\n\n\n\n\n\n\n";
 	cout << "\t                                                                             $$\\                         \n";
@@ -47,7 +25,10 @@ int main()
 	SetConsoleTextAttribute(h, 15);
 	_getch();
 	system("cls");
+}
 
+void timer()
+{
 	cout << "\n\n\n\n\n\n\n\n\n";
 	cout << "\t\t\t\t\t\t\t $$$$$$\\  \n";
 	cout << "\t\t\t\t\t\t\t$$ ___$$\\ \n";
@@ -83,6 +64,51 @@ int main()
 	cout << "\t\t\t\t\t\t\t\\______|";
 	Sleep(1000);
 	system("cls");
+}
+
+void game_over(HANDLE h)
+{
+	system("cls");
+	cout << "\n\n\n\n\n\n\n\n";
+	SetConsoleTextAttribute(h, 4);
+	cout << "\t\t $$$$$$\\   $$$$$$\\  $$\\      $$\\ $$$$$$$$\\        $$$$$$\\  $$\\    $$\\ $$$$$$$$\\ $$$$$$$\\  \n";
+	cout << "\t\t$$  __$$\\ $$  __$$\\ $$$\\    $$$ |$$  _____|      $$  __$$\\ $$ |   $$ |$$  _____|$$  __$$\\ \n";
+	cout << "\t\t$$ /  \\__|$$ /  $$ |$$$$\\  $$$$ |$$ |            $$ /  $$ |$$ |   $$ |$$ |      $$ |  $$ |\n";
+	cout << "\t\t$$ |$$$$\\ $$$$$$$$ |$$\\$$\\$$ $$ |$$$$$\\          $$ |  $$ |\\$$\\  $$  |$$$$$\\    $$$$$$$  |\n";
+	cout << "\t\t$$ |\\_$$ |$$  __$$ |$$ \\$$$  $$ |$$  __|         $$ |  $$ | \\$$\\$$  / $$  __|   $$  __$$< \n";
+	cout << "\t\t$$ |  $$ |$$ |  $$ |$$ |\\$  /$$ |$$ |            $$ |  $$ |  \\$$$  /  $$ |      $$ |  $$ |\n";
+	cout << "\t\t\\$$$$$$  |$$ |  $$ |$$ | \\_/ $$ |$$$$$$$$\\        $$$$$$  |   \\$  /   $$$$$$$$\\ $$ |  $$ |\n";
+	cout << "\t\t \\______/ \\__|  \\__|\\__|     \\__|\\________|       \\______/     \\_/    \\________|\\__|  \\__|\n\n\n\n\n";
+	SetConsoleTextAttribute(h, 15);
+	system("pause");
+}
+
+int main()
+{
+	srand(time(0));
+
+	int x_field = 50, y_field = 16;
+	int x_relative_pos = 30, y_relative_pos = 4;
+	x_field += x_relative_pos;
+	y_field += y_relative_pos;
+
+	int length = 2;
+
+	vector<int> X_nex(length);
+	vector<int> Y_nex(length);
+
+	char apple = 'o';
+	char snake_body = '#';
+	char snake_heads[4] = {16, 17, 30, 31};
+	int head_num = 0;
+
+	COORD c;
+	HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
+	CONSOLE_CURSOR_INFO cci = { sizeof(cci), false };
+	SetConsoleCursorInfo(h, &cci);
+
+	welcome(h);
+	timer();
 
 	for (int i = 0; i < y_relative_pos; i++)
 		cout << "\n";
@@ -242,6 +268,9 @@ int main()
 			putchar(snake_body);
 
 			length++;
+			X_nex.resize(length);
+			Y_nex.resize(length);
+
 			c.X = X_nex[length - 1] = x;
 			c.Y = Y_nex[length - 1] = y;
 			SetConsoleCursorPosition(h, c);
@@ -297,17 +326,5 @@ int main()
 		}
 	}
 
-	system("cls");
-	cout << "\n\n\n\n\n\n\n\n";
-	SetConsoleTextAttribute(h, 4);
-	cout << "\t\t $$$$$$\\   $$$$$$\\  $$\\      $$\\ $$$$$$$$\\        $$$$$$\\  $$\\    $$\\ $$$$$$$$\\ $$$$$$$\\  \n";
-	cout << "\t\t$$  __$$\\ $$  __$$\\ $$$\\    $$$ |$$  _____|      $$  __$$\\ $$ |   $$ |$$  _____|$$  __$$\\ \n";
-	cout << "\t\t$$ /  \\__|$$ /  $$ |$$$$\\  $$$$ |$$ |            $$ /  $$ |$$ |   $$ |$$ |      $$ |  $$ |\n";
-	cout << "\t\t$$ |$$$$\\ $$$$$$$$ |$$\\$$\\$$ $$ |$$$$$\\          $$ |  $$ |\\$$\\  $$  |$$$$$\\    $$$$$$$  |\n";
-	cout << "\t\t$$ |\\_$$ |$$  __$$ |$$ \\$$$  $$ |$$  __|         $$ |  $$ | \\$$\\$$  / $$  __|   $$  __$$< \n";
-	cout << "\t\t$$ |  $$ |$$ |  $$ |$$ |\\$  /$$ |$$ |            $$ |  $$ |  \\$$$  /  $$ |      $$ |  $$ |\n";
-	cout << "\t\t\\$$$$$$  |$$ |  $$ |$$ | \\_/ $$ |$$$$$$$$\\        $$$$$$  |   \\$  /   $$$$$$$$\\ $$ |  $$ |\n";
-	cout << "\t\t \\______/ \\__|  \\__|\\__|     \\__|\\________|       \\______/     \\_/    \\________|\\__|  \\__|\n\n\n\n\n";
-	SetConsoleTextAttribute(h, 15);
-	system("pause");
+	game_over(h);
 }
