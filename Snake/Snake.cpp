@@ -3,6 +3,11 @@
 #include <windows.h>
 #include <vector>
 
+#define KEY_DOWN 80
+#define KEY_UP 72
+#define KEY_LEFT 75
+#define KEY_RIGHT 77
+
 using namespace std;
 
 void welcome(HANDLE h)
@@ -193,40 +198,40 @@ int main()
 
 			switch (key)
 			{
-			case 80:
-				if (prev_key == 72)
+			case KEY_DOWN:
+				if (prev_key == KEY_UP)
 					break;
 				head_num = 3;
 				dy = 1;
 				dx = 0;
-				prev_key = 80;
+				prev_key = KEY_DOWN;
 				break;
 
-			case 72:
-				if (prev_key == 80)
+			case KEY_UP:
+				if (prev_key == KEY_DOWN)
 					break;
 				head_num = 2;
 				dy = -1;
 				dx = 0;
-				prev_key = 72;
+				prev_key = KEY_UP;
 				break;
 
-			case 75:
-				if (prev_key == 77)
+			case KEY_LEFT:
+				if (prev_key == KEY_RIGHT)
 					break;
 				head_num = 1;
 				dy = 0;
 				dx = -1;
-				prev_key = 75;
+				prev_key = KEY_LEFT;
 				break;
 
-			case 77:
-				if (prev_key == 75)
+			case KEY_RIGHT:
+				if (prev_key == KEY_LEFT)
 					break;
 				head_num = 0;
 				dy = 0;
 				dx = 1;
-				prev_key = 77;
+				prev_key = KEY_RIGHT;
 				break;
 			}
 		}
